@@ -39,7 +39,6 @@ public class LiveData {
         return tagStatus;
     }
 
-
     public void setTagStatus(int tagStatus) {
         this.tagStatus = tagStatus;
     }
