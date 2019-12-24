@@ -110,4 +110,19 @@ public interface SysJobMapper
 
     @DataSource(value = DataSourceType.SECOND)
     void insertTagInfoData(TagInfo tagInfo1);
+
+    @DataSource(value = DataSourceType.SLAVE)
+    int getInfoEventCount();
+
+    @DataSource(value = DataSourceType.SLAVE)
+    int getInfoEventCountByTingNan();
+
+    @DataSource(value = DataSourceType.SLAVE)
+    List<InfoEvent> getInfoEventByTingNan();
+
+    @DataSource(value = DataSourceType.SECOND)
+    void insertInfoEventToALiYun(InfoEvent infoEvent);
+
+    @DataSource(value = DataSourceType.SLAVE)
+    void updateInfoEventCount(@Param("counts") int counts,@Param("count") int count);
 }

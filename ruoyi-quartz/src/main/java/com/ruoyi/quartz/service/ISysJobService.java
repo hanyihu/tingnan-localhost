@@ -116,4 +116,6 @@ public interface ISysJobService
     void dataSyncAlarmHis();
 
     void dataSyncAlarmReal();
+
+    void dataSyncInfoEvent();
 }

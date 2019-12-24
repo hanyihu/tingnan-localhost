@@ -84,6 +84,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	</sql>
 
+	<sql id="InfoEventVo">
+		id_ as id ,
+		time_ as time ,
+		systype as systype ,
+		tagname as tagname ,
+		tagkey as tagkey ,
+		Device as device ,
+		SubDevice as subDevice ,
+		addr_ as addr ,
+		val_ as val ,
+		info_ as info
+		event_ as event ,
+		class_ as classs ,
+		user_ as user ,
+		res_ as res ,
+		varinfo_ as varinfo ,
+		confirm_ as confirm ,
+		cuser_ as cuser ,
+		ctime_ as ctime
+
+	</sql>
 
 	<sql id="selectJobVo">
         select job_id, job_name, job_group, invoke_target, cron_expression, misfire_policy, concurrent, status, create_by, create_time, remark 
@@ -118,8 +139,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where job_id = #{jobId}
 	</select>
 
-
-
 	<!--从亭南获取tagInfo数据-->
 	<select id="getTagInfoByTingNan" resultType="com.ruoyi.quartz.domain.TagInfo">
 		select
@@ -147,6 +166,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select
 		<include refid="AlarmRealVo"></include>
 		from AlarmReal
+	</select>
+
+	<!--查询数量InfoEventCount-->
+	<select id="getInfoEventCount" resultType="java.lang.Integer">
+		select counts from info_event_count
+	</select>
+
+	<!--查询数量InfoEventCount-->
+	<select id="getInfoEventCountByTingNan" resultType="java.lang.Integer">
+		select count(id_) from info_event
+	</select>
+
+	<!--查询亭南数据InfoEvent-->
+	<select id="getInfoEventByTingNan" resultType="com.ruoyi.quartz.domain.InfoEvent">
+        select <include refid="InfoEventVo"/>
+		from info_event
 	</select>
 
 
@@ -197,8 +232,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		</set>
  		where job_id = #{jobId}
 	</update>
- 	
- 	<insert id="insertJob" parameterType="SysJob" useGeneratedKeys="true" keyProperty="jobId">
+
+	<!--更新亭南数据库info_event_count数量-->
+	<update id="updateInfoEventCount">
+		update info_event_count set counts = #{counts} where counts = #{count}
+	</update>
+
+	<insert id="insertJob" parameterType="SysJob" useGeneratedKeys="true" keyProperty="jobId">
  		insert into sys_job(
  			<if test="jobId != null and jobId != 0">job_id,</if>
  			<if test="jobName != null and jobName != ''">job_name,</if>
@@ -373,6 +413,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{modifyDate},
 			#{modifyUserId},
 			#{modifyUserName}
+			)
+
+	</insert>
+
+	<!--插入InfoEvent数据到阿里云中-->
+	<insert id="insertInfoEventToALiYun">
+		INSERT  INTO  info_event(id_,time_,systype,tagname,tagkey,Device,SubDevice,addr_,val_,
+		info_,event_,class_,user_,res_,varinfo_,confirm_,cuser_,ctime_
+		)
+		 values
+		 (
+			#{id},
+			#{time},
+			#{systype},
+			#{tagname},
+			#{tagkey},
+			#{device},
+			#{subDevice},
+			#{addr},
+			#{val},
+			#{info},
+			#{event},
+			#{classs},
+			#{user},
+			#{res},
+			#{varinfo},
+			#{confirm},
+			#{cuser},
+			#{ctime}
+
 			)
 
 	</insert>

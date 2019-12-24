@@ -360,4 +360,41 @@ public class SysJobServiceImpl implements ISysJobService
     }
 
 
+    /**
+     * 功能描述: <br>  每隔2s进行一次InfoEvent查询，有新数据进行同步
+     * 〈〉
+     * @Param: []
+     * @Return: void
+     * @Author: 韩以虎
+     * @Date: 2019/12/24 14:57
+     */
+    @Override
+    public void dataSyncInfoEvent() {
+
+        //查询info_event_count数量
+        int count = jobMapper.getInfoEventCount();
+
+        //查询亭南info_event数据数量
+        int countByTingNan = jobMapper.getInfoEventCountByTingNan();
+
+        //判断数量是否相等 不相等则插入数据到阿里云中
+        if(count != countByTingNan){
+
+          List<InfoEvent> infoEventList = jobMapper.getInfoEventByTingNan();
+
+          if(infoEventList.size()!=0){
+              for (InfoEvent infoEvent: infoEventList) {
+                  jobMapper.insertInfoEventToALiYun(infoEvent);
+
+              }
+             //更新info_event_count数量
+              jobMapper.updateInfoEventCount(countByTingNan,count);
+          }
+
+        }
+
+
+    }
+
+
 }

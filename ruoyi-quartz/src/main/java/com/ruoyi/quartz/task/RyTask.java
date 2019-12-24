@@ -88,4 +88,14 @@ public class RyTask
     }
 
 
+
+    /**
+     * 功能描述: <br>  每2s进行一次告警数据InfoEvent查询
+     * 〈〉
+     * @Param: []
+     * @Return: void
+     * @Author: 韩以虎
+     * @Date: 2019/12/22 11:57
+     */
+    public void dataSyncInfoEvent(){jobService.dataSyncInfoEvent();}
 }
