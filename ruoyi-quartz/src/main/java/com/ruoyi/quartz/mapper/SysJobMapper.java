@@ -125,4 +125,7 @@ public interface SysJobMapper
 
     @DataSource(value = DataSourceType.SLAVE)
     void updateInfoEventCount(@Param("counts") int counts,@Param("count") int count);
+
+    @DataSource(value = DataSourceType.SECOND)
+    void deleteInfoEventToALiYun();
 }

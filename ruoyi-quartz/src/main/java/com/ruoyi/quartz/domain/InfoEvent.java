@@ -8,7 +8,7 @@ package com.ruoyi.quartz.domain;
 public class InfoEvent {
 
     private String id;
-    private String time;
+    private String times;
     private String systype;
     private String tagname;
     private String tagkey;
@@ -19,11 +19,11 @@ public class InfoEvent {
     private String info;
     private int event;
     private int classs;
-    private String user;
+    private String users;
     private int res;
     private String varinfo;
     private int confirm;
-    private String cuser_;
+    private String cuser;
     private String ctime;
 
     public String getId() {
@@ -35,11 +35,11 @@ public class InfoEvent {
     }
 
     public String getTime() {
-        return time;
+        return times;
     }
 
     public void setTime(String time) {
-        this.time = time;
+        this.times = time;
     }
 
     public String getSystype() {
@@ -123,11 +123,11 @@ public class InfoEvent {
     }
 
     public String getUser() {
-        return user;
+        return users;
     }
 
     public void setUser(String user) {
-        this.user = user;
+        this.users = user;
     }
 
     public int getRes() {
@@ -155,11 +155,11 @@ public class InfoEvent {
     }
 
     public String getCuser_() {
-        return cuser_;
+        return cuser;
     }
 
     public void setCuser_(String cuser_) {
-        this.cuser_ = cuser_;
+        this.cuser= cuser_;
     }
 
     public String getCtime() {
@@ -174,7 +174,7 @@ public class InfoEvent {
     public String toString() {
         return "InfoEvent{" +
                 "id='" + id + '\'' +
-                ", time='" + time + '\'' +
+                ", time='" + times + '\'' +
                 ", systype='" + systype + '\'' +
                 ", tagname='" + tagname + '\'' +
                 ", tagkey='" + tagkey + '\'' +
@@ -185,11 +185,11 @@ public class InfoEvent {
                 ", info='" + info + '\'' +
                 ", event=" + event +
                 ", classs=" + classs +
-                ", user='" + user + '\'' +
+                ", user='" + users + '\'' +
                 ", res=" + res +
                 ", varinfo='" + varinfo + '\'' +
                 ", confirm=" + confirm +
-                ", cuser_='" + cuser_ + '\'' +
+                ", cuser_='" + cuser + '\'' +
                 ", ctime='" + ctime + '\'' +
                 '}';
     }

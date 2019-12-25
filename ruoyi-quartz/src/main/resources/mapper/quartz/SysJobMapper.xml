@@ -86,7 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<sql id="InfoEventVo">
 		id_ as id ,
-		time_ as time ,
+		time_ as times ,
 		systype as systype ,
 		tagname as tagname ,
 		tagkey as tagkey ,
@@ -94,10 +94,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SubDevice as subDevice ,
 		addr_ as addr ,
 		val_ as val ,
-		info_ as info
+		info_ as info,
 		event_ as event ,
 		class_ as classs ,
-		user_ as user ,
+		user_ as users ,
 		res_ as res ,
 		varinfo_ as varinfo ,
 		confirm_ as confirm ,
@@ -175,13 +175,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!--查询数量InfoEventCount-->
 	<select id="getInfoEventCountByTingNan" resultType="java.lang.Integer">
-		select count(id_) from info_event
+		select count(id_) from info_event where event_ = 1
 	</select>
 
 	<!--查询亭南数据InfoEvent-->
 	<select id="getInfoEventByTingNan" resultType="com.ruoyi.quartz.domain.InfoEvent">
         select <include refid="InfoEventVo"/>
 		from info_event
+		where event_ = 1
 	</select>
 
 
@@ -214,6 +215,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--清空阿里云数据库中AlarmReal表内容-->
 	<delete id="deleteAlarmRealByAliYun">
 		DELETE FROM AlarmReal
+	</delete>
+
+	<!--清空阿里云数据库中InfoEvent表内容-->
+	<delete id="deleteInfoEventToALiYun">
+		DELETE FROM info_event
 	</delete>
 
 	<update id="updateJob" parameterType="SysJob">
@@ -419,13 +425,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!--插入InfoEvent数据到阿里云中-->
 	<insert id="insertInfoEventToALiYun">
-		INSERT  INTO  info_event(id_,time_,systype,tagname,tagkey,Device,SubDevice,addr_,val_,
+		INSERT  INTO  info_event(time_,systype,tagname,tagkey,Device,SubDevice,addr_,val_,
 		info_,event_,class_,user_,res_,varinfo_,confirm_,cuser_,ctime_
 		)
 		 values
 		 (
-			#{id},
-			#{time},
+			#{times},
 			#{systype},
 			#{tagname},
 			#{tagkey},
@@ -436,7 +441,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{info},
 			#{event},
 			#{classs},
-			#{user},
+			#{users},
 			#{res},
 			#{varinfo},
 			#{confirm},

@@ -382,6 +382,9 @@ public class SysJobServiceImpl implements ISysJobService
 
           List<InfoEvent> infoEventList = jobMapper.getInfoEventByTingNan();
 
+          //清空阿里云中info_event的数据
+            jobMapper.deleteInfoEventToALiYun();
+
           if(infoEventList.size()!=0){
               for (InfoEvent infoEvent: infoEventList) {
                   jobMapper.insertInfoEventToALiYun(infoEvent);
