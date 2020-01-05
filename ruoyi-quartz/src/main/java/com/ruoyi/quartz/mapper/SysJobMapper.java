@@ -131,4 +131,7 @@ public interface SysJobMapper
 
     @DataSource(value = DataSourceType.SLAVE)
     int getLiveDataCountsByTingNan();
+
+    @DataSource(value = DataSourceType.SLAVE)
+    void updateLiveDataCount(@Param("size")int size, @Param("count")int count);
 }

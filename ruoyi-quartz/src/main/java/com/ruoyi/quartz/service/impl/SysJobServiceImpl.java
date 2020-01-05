@@ -274,15 +274,19 @@ public class SysJobServiceImpl implements ISysJobService
     public void dataSyncLiveData() {
         //查询亭南数据ku
         //查询亭南数据ku中实时数据条数
-        int count = jobMapper.getLiveDataCountsByTingNan();
+        int counts = jobMapper.getLiveDataCountsByTingNan();
 
         List<LiveData> liveData= jobMapper.getLiveDataByTingNan();
-        if(liveData.size()!=count){
+        logger.info("LiveData 的数量count===={}===={}",counts,liveData.size());
+        if(liveData.size()!=counts){
             //清空阿里云中tagInfo数据表
             jobMapper.deleteLiveDataByAliYun();
 
             //吧亭南数据同步到阿里云中
             jobMapper.insertLiveDataByTingNan(liveData);
+
+            //修改数量
+            jobMapper.updateLiveDataCount(liveData.size(),counts);
         }
 
     }

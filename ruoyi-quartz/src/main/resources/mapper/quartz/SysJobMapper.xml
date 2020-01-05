@@ -249,6 +249,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update info_event_count set counts = #{counts} where counts = #{count}
 	</update>
 
+	<!--修改LiveDatacount数量-->
+	<update id="updateLiveDataCount">
+		update LiveDataCount set counts = #{size} where counts = #{count}
+	</update>
+
 	<insert id="insertJob" parameterType="SysJob" useGeneratedKeys="true" keyProperty="jobId">
  		insert into sys_job(
  			<if test="jobId != null and jobId != 0">job_id,</if>
