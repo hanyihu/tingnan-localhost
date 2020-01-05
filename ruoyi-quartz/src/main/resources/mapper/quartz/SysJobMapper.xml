@@ -185,6 +185,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where event_ = 1
 	</select>
 
+	<!--查询亭南LiveDataCount的数量-->
+	<select id="getLiveDataCountsByTingNan" resultType="java.lang.Integer">
+		select counts from LiveDataCount
+	</select>
+
 
 	<delete id="deleteJobById" parameterType="Long">
  		delete from sys_job where job_id = #{jobId}

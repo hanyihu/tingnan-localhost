@@ -273,8 +273,11 @@ public class SysJobServiceImpl implements ISysJobService
     @Override
     public void dataSyncLiveData() {
         //查询亭南数据ku
+        //查询亭南数据ku中实时数据条数
+        int count = jobMapper.getLiveDataCountsByTingNan();
+
         List<LiveData> liveData= jobMapper.getLiveDataByTingNan();
-        if(liveData.size()!=0){
+        if(liveData.size()!=count){
             //清空阿里云中tagInfo数据表
             jobMapper.deleteLiveDataByAliYun();
 
@@ -348,8 +351,8 @@ public class SysJobServiceImpl implements ISysJobService
     @Override
     public void dataSyncAlarmReal() {
 
-        //查询亭南数据ku
         List<AlarmReal> alarmReals= jobMapper.getAlarmRealByTingNan();
+
         if(alarmReals.size()!=0){
             //清空阿里云中tagInfo数据表
             jobMapper.deleteAlarmRealByAliYun();

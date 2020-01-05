@@ -128,4 +128,7 @@ public interface SysJobMapper
 
     @DataSource(value = DataSourceType.SECOND)
     void deleteInfoEventToALiYun();
+
+    @DataSource(value = DataSourceType.SLAVE)
+    int getLiveDataCountsByTingNan();
 }
