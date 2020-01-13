@@ -254,6 +254,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update LiveDataCount set counts = #{size} where counts = #{count}
 	</update>
 
+	<!--修改阿里云服务器LiveData数据-->
+	<update id="updateLiveDataToAliYun" parameterType="java.util.List" >
+
+		<foreach  collection="list"  item ="item"  index  = "index">
+		update
+		LiveData
+		set
+		  value = #{item.value},
+		  timestamp = #{item.timestamp},
+		  TagStatus = #{item.tagStatus}
+
+		where
+			TagKey  =#{item.tagKey}
+
+	</foreach>
+
+	</update>
+
 	<insert id="insertJob" parameterType="SysJob" useGeneratedKeys="true" keyProperty="jobId">
  		insert into sys_job(
  			<if test="jobId != null and jobId != 0">job_id,</if>

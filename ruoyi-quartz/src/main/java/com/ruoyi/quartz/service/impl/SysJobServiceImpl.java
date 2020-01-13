@@ -263,7 +263,8 @@ public class SysJobServiceImpl implements ISysJobService
 
 
     /**
-     * 功能描述: <br>  每隔2s进行LiveData实时数据同步
+     * 功能描述: <br>  每隔30s进行LiveData实时数据同步
+     *
      * 〈〉
      * @Param: []
      * @Return: void
@@ -274,20 +275,29 @@ public class SysJobServiceImpl implements ISysJobService
     public void dataSyncLiveData() {
         //查询亭南数据ku
         //查询亭南数据ku中实时数据条数
-        int counts = jobMapper.getLiveDataCountsByTingNan();
+        //int counts = jobMapper.getLiveDataCountsByTingNan();
 
         List<LiveData> liveData= jobMapper.getLiveDataByTingNan();
-        logger.info("LiveData 的数量count===={}===={}",counts,liveData.size());
-        if(liveData.size()!=counts){
-            //清空阿里云中tagInfo数据表
+        //logger.info("LiveData 的数量count===={}===={}",counts,liveData.size());
+        int count = 0;
+
+
+            //修改阿里云服务器数据
+           int j= jobMapper.updateLiveDataToAliYun(liveData);
+          if(j>0){
+              logger.info("修改的livadata数据条数修改成功");
+          }
+
+
+           /* //清空阿里云中tagInfo数据表
             jobMapper.deleteLiveDataByAliYun();
 
             //吧亭南数据同步到阿里云中
             jobMapper.insertLiveDataByTingNan(liveData);
 
             //修改数量
-            jobMapper.updateLiveDataCount(liveData.size(),counts);
-        }
+            jobMapper.updateLiveDataCount(liveData.size(),counts);*/
+
 
     }
 
